@@ -7,9 +7,10 @@ public class CalculatorRepository {
 	//static Calculator c = null;
 
 	public static long calculate(long x, long y, String operation) {
+		System.out.println("Long function calculate");
 
 		//c = new Calculator(x, y, operation);
-		long result;
+		long result = 0;
 		String op;
 		try {
 		if ("ADD".equalsIgnoreCase(operation)) {
@@ -26,8 +27,8 @@ public class CalculatorRepository {
 			op = "/";
 		} else {
 			// defaults to zero
-			result = 0;
-			
+			System.out.println("Invalid operation is used "+x+" "+y+" "+operation);
+			result=-1;
 		}
 
 		//c.setResult(result);
@@ -38,12 +39,12 @@ public class CalculatorRepository {
 		{
 			System.out.println("Invalid data combination is used "+x+" "+y+" "+operation);
 			e.printStackTrace();
-			return 0;
+			return -1;
 		}
 	}
 	
 	public static double calculate(double x, double y, String operation) {
-
+		System.out.println("Double function calculate");
 		//c = new Calculator(x, y, operation);
 		double result;
 		String op;
@@ -62,7 +63,8 @@ public class CalculatorRepository {
 			op = "/";
 		} else {
 			// defaults to zero
-			result = 0;
+			System.out.println("Invalid data combination is used "+x+" "+y+" "+operation);
+			result = -1;
 			
 		}
 
@@ -74,7 +76,7 @@ public class CalculatorRepository {
 		{
 			System.out.println("Invalid data combination is used "+x+" "+y+" "+operation);
 			e.printStackTrace();
-			return 0;
+			return -1;
 		}
 	}
 

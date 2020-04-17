@@ -54,18 +54,19 @@ public class CalculatorResource {
 			 resultDoule =CalculatorRepository.calculate(d1,d2,op);
 		}
 		
-		if(resultLong != 0  )
+		if(resultLong != -1  )
 			 return Response.status(200)  
 			            .entity(no1+" "+op+" " + no2+" : "+resultLong)  
 			            .build(); 
-		else if(resultDoule!=0)
+		else if(resultDoule!=-1)
 			 return Response.status(200)  
 			            .entity(no1+" "+op+" " + no2+" : "+resultDoule)  
 			            .build(); 
-		else
+		else if (resultLong==-1 || resultDoule!=-1) 
 			 return Response.status(200)  
 			            .entity("Supported operations are ADD SUB MULT DIV '"+op+"' is invalid")  
 			            .build();
+		return null;
 
 	}
 	
