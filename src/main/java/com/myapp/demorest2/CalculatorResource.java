@@ -25,13 +25,42 @@ public class CalculatorResource {
 	
 	@GET
 	@Path("{op}/{no1}/{no2}")		
-	public Response createAliean2(@PathParam("op")String op ,@PathParam("no1")int no1,@PathParam("no2")int no2)
+	public Response createAliean2(@PathParam("op")String op ,@PathParam("no1")String no1,@PathParam("no2")String no2)
 	{
+		double d1 = 0,d2 = 0;long l1 = 0,l2=0;
+		boolean Isdouble=true,IsLong=true;
+		try {
+			d1= Double.valueOf(no1);
+			d2= Double.valueOf(no2);
+		}catch(Exception e) {
+			Isdouble =false;
+		}
 		
-		Integer result =CalculatorRepository.calculate(no1,no2,op);
-		if(result != 0)
+		try {
+			l1=Long.valueOf(no1);
+			l2=Long.valueOf(no2);
+		}
+		catch(Exception e) {
+			IsLong =false;
+		}
+		Long resultLong=(long) 0;
+		Double resultDoule=(double) 0;
+		
+		if(IsLong) {
+		   resultLong =CalculatorRepository.calculate(l1,l2,op);
+		}
+		else if(Isdouble)
+		{
+			 resultDoule =CalculatorRepository.calculate(d1,d2,op);
+		}
+		
+		if(resultLong != 0  )
 			 return Response.status(200)  
-			            .entity(no1+" "+op+" " + no2+" : "+result)  
+			            .entity(no1+" "+op+" " + no2+" : "+resultLong)  
+			            .build(); 
+		else if(resultDoule!=0)
+			 return Response.status(200)  
+			            .entity(no1+" "+op+" " + no2+" : "+resultDoule)  
 			            .build(); 
 		else
 			 return Response.status(200)  
@@ -39,4 +68,6 @@ public class CalculatorResource {
 			            .build();
 
 	}
+	
+	
 }
