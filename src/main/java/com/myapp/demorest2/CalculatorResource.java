@@ -10,17 +10,6 @@ import javax.ws.rs.core.Response;
 
 @Path("calculator")
 public class CalculatorResource {
-
-	
-//	@POST
-//	@Path("operation/{op}{no1}{no2}")
-//	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-//	public int createAliean(@PathParam("op")String op ,@PathParam("no1")int no1,@PathParam("no2")int no2)
-//	{
-//		System.out.println(op+" : -"+" No1 "+no1+" No2 "+no2);
-//		int result =CalculatorRepository.calculate(no1,no2,op);
-//		return result;
-//	}
 	
 	@GET
 	@Path("{op}/{no1}/{no2}")		
