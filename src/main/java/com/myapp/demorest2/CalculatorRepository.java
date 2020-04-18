@@ -1,8 +1,13 @@
 package com.myapp.demorest2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 public class CalculatorRepository {
+	static List<String> operation = Arrays.asList("ADD","SUB","MULT","DIV");
 
 	//static Calculator c = null;
 
@@ -25,10 +30,6 @@ public class CalculatorRepository {
 		} else if ("DIV".equalsIgnoreCase(operation)) {
 			result = x / y;
 			op = "/";
-		} else {
-			// defaults to zero
-			System.out.println("Invalid operation is used "+x+" "+y+" "+operation);
-			result=-1;
 		}
 
 		//c.setResult(result);
@@ -46,7 +47,7 @@ public class CalculatorRepository {
 	public static double calculate(double x, double y, String operation) {
 		System.out.println("Double function calculate");
 		//c = new Calculator(x, y, operation);
-		double result;
+		double result = 0;
 		String op;
 		try {
 		if ("ADD".equalsIgnoreCase(operation)) {
@@ -61,12 +62,7 @@ public class CalculatorRepository {
 		} else if ("DIV".equalsIgnoreCase(operation)) {
 			result = x / y;
 			op = "/";
-		} else {
-			// defaults to zero
-			System.out.println("Invalid data combination is used "+x+" "+y+" "+operation);
-			result = -1;
-			
-		}
+		} 
 
 		//c.setResult(result);
 		//System.out.println(c);

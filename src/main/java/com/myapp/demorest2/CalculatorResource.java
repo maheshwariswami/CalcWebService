@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 @Path("calculator")
 public class CalculatorResource {
 
-
 	
 //	@POST
 //	@Path("operation/{op}{no1}{no2}")
@@ -25,8 +24,16 @@ public class CalculatorResource {
 	
 	@GET
 	@Path("{op}/{no1}/{no2}")		
-	public Response createAliean2(@PathParam("op")String op ,@PathParam("no1")String no1,@PathParam("no2")String no2)
+	public Response calculator(@PathParam("op")String op ,@PathParam("no1")String no1,@PathParam("no2")String no2)
 	{
+		if(!CalculatorRepository.operation.contains(op.toUpperCase()))
+		{
+			System.out.println("Invalid operation specified : "+op.toUpperCase());
+			 return Response.status(200)  
+			            .entity("Invalid operation specified : "+op.toUpperCase())  
+			            .build();
+		}
+		
 		double d1 = 0,d2 = 0;long l1 = 0,l2=0;
 		boolean Isdouble=true,IsLong=true;
 		try {
@@ -43,31 +50,33 @@ public class CalculatorResource {
 		catch(Exception e) {
 			IsLong =false;
 		}
+		
+		if(IsLong == false && Isdouble ==false)
+		{
+			System.out.println("Invalid Numbers supplied : "+ no1 + " AND "+no2);
+			 return Response.status(200)  
+			            .entity("Invalid Numbers supplied : "+ no1 + " AND "+no2)  
+			            .build();
+		}
+		
 		Long resultLong=(long) 0;
-		Double resultDoule=(double) 0;
+		Double resultDouble=(double) 0;
 		
 		if(IsLong) {
 		   resultLong =CalculatorRepository.calculate(l1,l2,op);
+		   return Response.status(200)  
+		            .entity(no1+" "+op.toUpperCase()+" " + no2+" : "+resultLong)  
+		            .build(); 
 		}
 		else if(Isdouble)
 		{
-			 resultDoule =CalculatorRepository.calculate(d1,d2,op);
+			 resultDouble =CalculatorRepository.calculate(d1,d2,op);
+			 return Response.status(200)  
+			            .entity(no1+" "+op.toUpperCase()+" " + no2+" : "+resultDouble)  
+			            .build(); 
 		}
 		
-		if(resultLong != -1  )
-			 return Response.status(200)  
-			            .entity(no1+" "+op+" " + no2+" : "+resultLong)  
-			            .build(); 
-		else if(resultDoule!=-1)
-			 return Response.status(200)  
-			            .entity(no1+" "+op+" " + no2+" : "+resultDoule)  
-			            .build(); 
-		else if (resultLong==-1 || resultDoule!=-1) 
-			 return Response.status(200)  
-			            .entity("Supported operations are ADD SUB MULT DIV '"+op+"' is invalid")  
-			            .build();
 		return null;
-
 	}
 	
 	
